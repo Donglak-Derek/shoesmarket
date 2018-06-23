@@ -1,0 +1,30 @@
+<div class="container">
+<p><a href="/dashboard/<%= current_user.id %>">Go to Dashboard</a></p>
+</div>
+<div class="container">
+    <h1>Welcome, <%= current_user.first_name %></h1>
+    <h3>All shoe:</h3>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <td>shoe</td>
+                <td>Seller</td>
+                <td>Date Posted</td>
+                <td>Amount</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% @shoes.each do |shoe| %>
+                <tr>
+                    <td><%= shoe.name %></td>
+                    <td><%= User.find_by(id: shoe.user_id).first_name %></td>
+                    <td><%= shoe.created_at.strftime("%F") %></td>
+                    <td>$<%= shoe.amount %></td>
+                    <td><a href="/shoes/<%= shoe.id %>" data-method="patch">Buy</a></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+</div>
